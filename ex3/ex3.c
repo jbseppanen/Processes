@@ -9,7 +9,15 @@
 
 int main(void)
 {
-    // Your code here
-
+    int child_fork = fork();
+    if (child_fork == 0)
+    {
+        printf("hello\n");
+    }
+    else
+    {
+        waitpid(child_fork, NULL, 0);
+        printf("goodbye\n");
+    }
     return 0;
 }

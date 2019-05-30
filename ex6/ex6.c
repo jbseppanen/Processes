@@ -14,13 +14,29 @@ and `clock_gettime()` should work just fine.
 #include <stdio.h>
 #include <unistd.h>
 #include <time.h>
+#include "lib.h"
 
 #define number_iter 1000000
 #define BILLION 1000000000L
 
+int clock_get(struct timespec *tv)
+{
+    return timespec_get(tv, TIME_UTC);
+}
+
 int main()
 {
-    // Your code here
-    
+    struct timespec beginning, ending;
+    long long total_time = 0;
+
+    for (int i = 0; i < number_iter; i++)
+    {
+        clock_get(&beginning);
+        write(fileno(stdout), NULL, 0);
+        clock_get(&ending);
+
+        total_time += BILLION * (ending.tv_sec - beginning.tv_sec) + ending.tv_nsec - beginning.tv_nsec;
+    }
+    printf("%llu\n", total_time / number_iter);
     return 0;
 }
