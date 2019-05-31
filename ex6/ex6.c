@@ -19,11 +19,6 @@ and `clock_gettime()` should work just fine.
 #define number_iter 1000000
 #define BILLION 1000000000L
 
-int clock_get(struct timespec *tv)
-{
-    return timespec_get(tv, TIME_UTC);
-}
-
 int main()
 {
     struct timespec beginning, ending;

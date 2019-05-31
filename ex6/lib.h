@@ -1,8 +1,8 @@
 #ifndef lib_h
 #define lib_h
-struct timespec
+
+int clock_get(struct timespec *tv)
 {
-  long tv_sec;
-  long tv_nsec;
-}; 
+    return timespec_get(tv, TIME_UTC);
+}
 #endif
